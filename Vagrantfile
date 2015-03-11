@@ -42,7 +42,7 @@ SCRIPT
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
 
-  {dc1: 20}.each do |dc,net|
+  {dc1: 20, dc2: 30}.each do |dc,net|
     # Consul Servers
     (10..10).each do |id|
       config.vm.define "#{dc}-consul-server-#{id}" do |n|
