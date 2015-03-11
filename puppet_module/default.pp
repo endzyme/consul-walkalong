@@ -32,7 +32,7 @@ node /^dc(1|2)-web-[0-9]+$/ {
   $web_service = {
     'web' => {
       port => 80,
-      check_script => 'pidof apache2',
+      check_script => 'service apache2 status',
       check_interval => '5s',
       tags => [$::hostname],
     }
@@ -65,7 +65,7 @@ node /^dc(1|2)-db-[0-9]+$/ {
   $db_service = {
     'db' => {
       port => 3306,
-      check_script => 'pidof mysqld',
+      check_script => 'service mysqld status',
       check_interval => '5s',
       tags => [$::hostname],
     }
