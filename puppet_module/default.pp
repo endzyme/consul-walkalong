@@ -67,7 +67,7 @@ node /^dc(1|2)-db-[0-9]+$/ {
       port => 3306,
       check_script => 'service mysqld status',
       check_interval => '5s',
-      tags => [$::hostname],
+      tags => [$::hostname, 'sql'],
     }
   }
 
