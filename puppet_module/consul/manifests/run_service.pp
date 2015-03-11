@@ -24,7 +24,7 @@ class consul::run_service {
       path      => [$consul::bin_dir,'/bin','/usr/bin'],
       command   => "consul join -wan ${consul::join_wan}",
       unless    => "consul members -wan -detailed | grep -vP \"dc=${consul::config_hash_real['datacenter']}\" | grep -P 'alive'",
-      subscribe => Service['consul'],
+      # subscribe => Service['consul'],
     }
   }
 

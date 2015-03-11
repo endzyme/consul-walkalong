@@ -28,8 +28,19 @@ node /^dc(1|2)-consul-server-[0-9]+$/ {
 
 node /^dc(1|2)-web-[0-9]+$/ {
   notify{'im a web node!': }
+
+  $web_service = {
+    'web' => {
+      port => 80,
+      check_script => 'pidof apache2',
+      check_interval => '5s',
+      tags => [$::hostname],
+    }
+  }
+
   class {'consul':
     version => '0.5.0',
+    services => $web_service,
     config_hash => {
       data_dir => '/opt/consul',
       log_level => 'INFO',
@@ -50,8 +61,19 @@ node /^dc(1|2)-web-[0-9]+$/ {
 
 node /^dc(1|2)-db-[0-9]+$/ {
   notify{'im a db node!': }
+
+  $db_service = {
+    'db' => {
+      port => 3306,
+      check_script => 'pidof mysqld',
+      check_interval => '5s',
+      tags => [$::hostname],
+    }
+  }
+
   class {'consul':
     version => '0.5.0',
+    services => $db_service,
     config_hash => {
       data_dir => '/opt/consul',
       log_level => 'INFO',
