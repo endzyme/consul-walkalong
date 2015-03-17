@@ -65,7 +65,7 @@ node /^dc(1|2)-db-[0-9]+$/ {
   $db_service = {
     'db' => {
       port => 3306,
-      check_script => 'service mysqld status',
+      check_script => 'mysql -utest_user -e "select 1;"; if [[ $? -ne 0 ]]; then exit 2; else exit 0; fi',
       check_interval => '5s',
       tags => [$::hostname, 'sql'],
     }

@@ -34,6 +34,7 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password_again passwo
 sudo apt-get install -y mysql-server
 mysqladmin -u root -pfoobar create joomla
 mysql -uroot -pfoobar -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON joomla.* TO 'joomla'@'%' IDENTIFIED BY 'foobar';"
+mysql -uroot -pfoobar -e "CREATE USER 'test_user'@'localhost';"
 sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
 sudo service mysql restart
 SCRIPT
